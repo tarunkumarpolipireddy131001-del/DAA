@@ -1,0 +1,35 @@
+n = int(input("Enter number of vertices: "))
+graph = []
+
+for i in range(n):
+    graph.append(list(map(int, input().split())))
+
+visited = [False] * n
+visited[0] = True
+edges = 0
+cost = 0
+
+print("Minimum Spanning Tree:")
+
+while edges < n - 1:
+    minimum = float('inf')
+    u = -1
+    v = -1
+
+    for i in range(n):
+        if visited[i]:
+            for j in range(n):
+                if not visited[j] and graph[i][j] != 0 and graph[i][j] < minimum:
+                    minimum = graph[i][j]
+                    u = i
+                    v = j
+
+    if v == -1:
+        break
+
+    print(u, "-", v, ":", minimum)
+    cost += minimum
+    visited[v] = True
+    edges += 1
+
+print("Total cost:", cost)
